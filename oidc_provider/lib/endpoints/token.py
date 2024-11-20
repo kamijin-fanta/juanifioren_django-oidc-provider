@@ -71,7 +71,7 @@ class TokenEndpoint(object):
                 raise TokenError('invalid_client')
 
             try:
-                self.code = Code.objects.select_for_update(nowait=True).get(
+                self.code = Code.objects.select_for_update(nowait=False).get(
                     code=self.params['code'])
             except DatabaseError:
                 logger.debug('[Token] Code cannot be reused: %s', self.params['code'])
